@@ -20,32 +20,35 @@ public class MVC {
 
 
     public static void main(String[]args){
-        gameModel = new Game(); 
-        cmdLine = new CommandLine(); 
-        cmdController= new CmdController(gameModel, cmdLine); 
-        board = new BoardGame(); 
+        gameModel = new Game();
+        cmdLine = new CommandLine();
+        cmdController= new CmdController(gameModel, cmdLine);
+        board = new BoardGame();
         
         
-        MVC anMVC = new MVC(); 
-        anMVC.useConsoleView(); 
+        MVC anMVC = new MVC();
+        anMVC.useConsoleView();
     }
 
     public void useConsoleView() {
         cmdLine.setName();
         cmdLine.welcomeMessage();
-        cmdLine.setSizeType();
-        
-        String type = cmdLine.getSizeType();
+        String type;
+        do{
+            cmdLine.setSizeType();
+            type = cmdLine.getSizeType();
+        }while(!type.equals("y")&&!type.equals("n"));
         if(type.equalsIgnoreCase("n")){
             cmdLine.setDimensions();
-            cmdController.getInputs(); 
+            cmdController.getInputs();
             cmdController.calcDimensions();
         }
         else if(type.equalsIgnoreCase("y")){
             cmdLine.setDefault();
             cmdController.getInputs();
             cmdController.calcDimensions();
-        }
+        }        
+        
         
         cmdLine.startMessage();
         String command = cmdLine.getCommand();
