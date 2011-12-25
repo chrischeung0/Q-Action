@@ -68,11 +68,19 @@ public class CmdController{
         String[]results = instruction.split(" ");
         
          if(results[0].equalsIgnoreCase(commands[0])){
+<<<<<<< HEAD
              game.start(cmdLine.getName(), rows, cols);
              started = true;
          }
         else if(results[0].equalsIgnoreCase(commands[1])&&started==true)
              game.quit();
+=======
+             cmdLine.startGame();
+             game.start(cmdLine.getName(), rows, cols);
+         }
+        else if(results[0].equalsIgnoreCase(commands[1]))
+             game.quit(); 
+>>>>>>> b98d2a64e9c533778325c974ece0633b8274eead
         //else if(results[0].equalsIgnoreCase(commands[2]))
             // game.save();
         else if(results[0].equalsIgnoreCase(commands[3])&&started==true)
