@@ -47,7 +47,7 @@ public class CmdController{
             results = dimensions.split("X");
             rows = Integer.parseInt(results[0]);
             cols = Integer.parseInt(results[1]);
-                        
+                                
 //            System.out.println(rows);
 //            System.out.println(cols);
     }
@@ -67,20 +67,19 @@ public class CmdController{
         String instruction = cmd.trim();
         String[]results = instruction.split(" ");
         
-         if(results[0].equalsIgnoreCase(commands[0])){
-<<<<<<< HEAD
+         if(results[0].equalsIgnoreCase(commands[0])&&started==false){
+
              game.start(cmdLine.getName(), rows, cols);
-             started = true;
+             started = true; //notifies that the game has started so certain commands can only be executed after game started
          }
-        else if(results[0].equalsIgnoreCase(commands[1])&&started==true)
+        else if(results[0].equalsIgnoreCase(commands[1])&&started==true){
              game.quit();
-=======
+
              cmdLine.startGame();
              game.start(cmdLine.getName(), rows, cols);
-         }
-        else if(results[0].equalsIgnoreCase(commands[1]))
-             game.quit(); 
->>>>>>> b98d2a64e9c533778325c974ece0633b8274eead
+    }
+        
+
         //else if(results[0].equalsIgnoreCase(commands[2]))
             // game.save();
         else if(results[0].equalsIgnoreCase(commands[3])&&started==true)
@@ -104,8 +103,8 @@ public class CmdController{
              game.roll();
              
              cmdLine.printRolled(game.getNumberRolled());
-             rolled = -1;
-             hasRolled=true;
+             rolled = -1; //prevents the user from rolling twice since the condition to execute roll is when rolled==0
+             hasRolled=true; //move can only be executed after die is rolled so permission is given to move
         }
              
         else if(results[0].equalsIgnoreCase(commands[7])&&started==true&&hasRolled==true)
@@ -120,17 +119,23 @@ public class CmdController{
                 cmdLine.cmdError(errMessage);
             }
         else{
-            if(rolled ==-1){
+            if(rolled ==-1&&(results[0].equalsIgnoreCase(commands[6]))){
                 errMessage = "You have already rolled. Please move your token.";
                 cmdLine.cmdError(errMessage);
             }
-            if(started==false){
+            else if(started==false){
                 errMessage = "You need to start the game first.";
                 cmdLine.cmdError(errMessage);
             }
-            if(hasRolled==false){
-                errMessage = "You need to roll die before you can move.";
-                cmdLine.cmdError(errMessage);
+            else if((hasRolled==false)&&(results[0].equalsIgnoreCase(commands[0]))||(results[0].equalsIgnoreCase(commands[7]))){
+                if(results[0].equalsIgnoreCase(commands[0])){
+                    errMessage = "You've already pressed start.";
+                    cmdLine.cmdError(errMessage);
+                }
+                else{
+                    errMessage = "You need to roll die before you can move.";
+                    cmdLine.cmdError(errMessage);
+                }
             }
             else
                 System.out.println("Unknown command. To see the list of possible commands type in 'man'");

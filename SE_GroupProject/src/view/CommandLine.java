@@ -43,7 +43,7 @@ public class CommandLine {
 
     public void setExit(){
         System.out.println("Are you sure you want to quit the game? (y/n)");
-        exit = scan.nextLine(); 
+        exit = scan.nextLine();
     }
 
     
@@ -52,8 +52,10 @@ public class CommandLine {
     }
 
     public void setSizeType(){
-        System.out.println("Would you like to use the default board size (10X10)");
-        sizeType = scan.nextLine();
+        do{ //added do-while loop here so only "y" or "n" can be typed
+            System.out.println("Would you like to use the default board size (10X10)");
+            sizeType = scan.nextLine();
+        }while(!sizeType.equals("y")&&!sizeType.equals("n"));
     }
     
     public void startMessage(){
@@ -76,7 +78,7 @@ public class CommandLine {
     }
 
 
-    public void setDimensions(){
+    public void setDimensions(){ //need an error checking here
         System.out.println("What's the size of the board dimension do you want (rowXcolumn e.g (12X12)?");
         dimensions = scan.nextLine();
     }

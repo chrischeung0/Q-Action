@@ -34,7 +34,7 @@ public class MVC {
         cmdLine.setName();
         cmdLine.welcomeMessage();
         String type;
-        do{
+        do{ //this do-while loop prevents the user from typing anything except for y or n
             cmdLine.setSizeType();
             type = cmdLine.getSizeType();
         }while(!type.equals("y")&&!type.equals("n"));
