@@ -23,13 +23,15 @@ public class CmdController{
     private String typeBoardSize;
         private String[] commands = {"start","quit", "save", "pause", "resume", "load", "roll", "move", "man"};
         private String sizeType;
-        private int rolled = 0; //when a die has not been rolled, variable is 0. when rolled variable is -1
-        private boolean hasRolled = false;
-        private boolean started = false;
+        private int rolled;
+        private boolean hasRolled; //when a die has not been rolled, variable is false. when rolled variable is true
+        private boolean started;
         
     public CmdController(Game game, CommandLine cmdLine){
             this.game = game;
             this.cmdLine = cmdLine;
+            hasRolled = false;
+            started = false;
         }
     
     public void getInputs(){
@@ -99,11 +101,10 @@ public class CmdController{
 //           }       
       //  }
         
-        else if(results[0].equalsIgnoreCase(commands[6]) && rolled==0&&started==true){
+        else if(results[0].equalsIgnoreCase(commands[6]) && hasRolled==false&&started==true){
              game.roll();
              
              cmdLine.printRolled(game.getNumberRolled());
-             rolled = -1; //prevents the user from rolling twice since the condition to execute roll is when rolled==0
              hasRolled=true; //move can only be executed after die is rolled so permission is given to move
         }
              
@@ -119,7 +120,7 @@ public class CmdController{
                 cmdLine.cmdError(errMessage);
             }
         else{
-            if(rolled ==-1&&(results[0].equalsIgnoreCase(commands[6]))){
+            if(hasRolled ==true&&(results[0].equalsIgnoreCase(commands[6]))){
                 errMessage = "You have already rolled. Please move your token.";
                 cmdLine.cmdError(errMessage);
             }
@@ -151,4 +152,4 @@ public class CmdController{
     }
         
         
-} 
+}

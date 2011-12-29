@@ -33,11 +33,10 @@ public class MVC {
     public void useConsoleView() {
         cmdLine.setName();
         cmdLine.welcomeMessage();
-        String type;
-        do{ //this do-while loop prevents the user from typing anything except for y or n
-            cmdLine.setSizeType();
-            type = cmdLine.getSizeType();
-        }while(!type.equals("y")&&!type.equals("n"));
+        String type;        
+        cmdLine.setSizeType();
+        type = cmdLine.getSizeType();
+        
         if(type.equalsIgnoreCase("n")){
             cmdLine.setDimensions();
             cmdController.getInputs();

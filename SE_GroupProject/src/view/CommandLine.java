@@ -55,6 +55,8 @@ public class CommandLine {
         do{ //added do-while loop here so only "y" or "n" can be typed
             System.out.println("Would you like to use the default board size (10X10)");
             sizeType = scan.nextLine();
+            if(!sizeType.equalsIgnoreCase("y")&&!sizeType.equalsIgnoreCase("n"))
+                this.cmdError("ERROR---Please type y or n");
         }while(!sizeType.equals("y")&&!sizeType.equals("n"));
     }
     
